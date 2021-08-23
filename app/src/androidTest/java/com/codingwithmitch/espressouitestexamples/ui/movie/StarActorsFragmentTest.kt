@@ -9,28 +9,22 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.codingwithmitch.espressouitestexamples.R
 import com.codingwithmitch.espressouitestexamples.factory.MovieFragmentFactory
+import org.junit.Assert.*
 import org.junit.Test
-
 import org.junit.runner.RunWith
-import java.lang.StringBuilder
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class StarActorsFragmentTest{
-
+class StarActorsFragmentTest {
 
     @Test
-    fun test_isActorsListVisible() {
+    fun test_isStarActorsListVisible() {
 
-        // GIVEN
-        val actors = arrayListOf(
-            "Dwayne Johnson",
-            "Seann William Scott",
-            "Rosario Dawson",
-            "Christopher Walken"
-        )
+        // SETUP
+        val starActors = arrayListOf<String>("Dwayne Johnson", "Seann William Scott", "Rosario Dawson", "Christopher Walken")
         val fragmentFactory = MovieFragmentFactory()
         val bundle = Bundle()
-        bundle.putStringArrayList("args_actors", actors)
+        bundle.putStringArrayList("args_actors", starActors)
+
         val scenario = launchFragmentInContainer<StarActorsFragment>(
             fragmentArgs = bundle,
             factory = fragmentFactory
@@ -39,8 +33,7 @@ class StarActorsFragmentTest{
         // VERIFY
         onView(withId(R.id.star_actors_text))
             .check(matches(withText(
-                StarActorsFragment.stringBuilderForStarActors(actors)
+                StarActorsFragment.stringBuilderForStarActors(starActors)
             )))
     }
 }
-
