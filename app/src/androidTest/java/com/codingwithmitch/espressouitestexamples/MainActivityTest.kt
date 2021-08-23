@@ -44,8 +44,9 @@ class MainActivityTest{
 
         onView(withId(R.id.text_name)).check(matches(withText(NAME)))
 
-        // Is toast displayed and is the message correct?
-        onView(withText(buildToastMessage(NAME))).inRoot(ToastMatcher())
+        // test if toast is displayed
+        onView(withText(buildToastMessage(NAME)))
+            .inRoot(ToastMatcher())
             .check(matches(isDisplayed()))
     }
 }
